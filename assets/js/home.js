@@ -54,7 +54,7 @@ function toLink(id, item) {
 					'"></div>';
 			} else if (videos.indexOf(ext) != -1) {
 				media =
-					'<div class="post-media"><video src="https://cdn.stibarc.com/images/' +
+					'<div class="post-media"><video controls muted src="https://cdn.stibarc.com/images/' +
 					item["real_attachment"] +
 					'"></video></div>';
 			} else if (audio.indexOf(ext) != -1) {

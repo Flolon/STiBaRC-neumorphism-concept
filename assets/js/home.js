@@ -29,7 +29,38 @@ function toLink(id, item) {
 			.replace(/&/g, "&amp;")
 			.replace(/</g, "&lt;")
 			.replace(/>/g, "&gt;");
-		var date = getDayOfWeek(toDate(item["postdate"]));
+		var date = getDayOfWeek(toDate(item["postdate"])) + toDate(item["postdate"]);
+		datee = new Date();
+		month = datee.getMonth();
+		day = datee.getDate()
+		hour = datee.getHours();
+		minute = datee.getMinutes();
+		time = datee.getTime();
+		datee2 = toDate(item["postdate"]);
+		year2 = datee2.getFullYear();
+		month2 = datee2.getMonth();
+		day2 = datee2.getDate()
+		hour2 = datee2.getHours();
+		minute2 = datee2.getMinutes();
+		time2 = datee2.getTime();
+		console.log((time - time2) / 60000);
+		
+		if (
+			((time - time2) / 60000) < ((hour * 60) + (minute))
+		) {
+			var date = "Today";
+		} else if (
+			((time - time2) / 60000) < ((hour * 60) + 1440 + (minute))
+		) {
+			var date = "Yesterday";
+		} else if (
+			((time - time2) / 60000) < ((hour * 60) + 8640 + (minute))
+		) {
+			var date = getDayOfWeek(toDate(item["postdate"]));
+		} else {
+			var date = month2 + "/" + day2 + "/" + year2
+		}
+		
 		var comments = "0 comments";
 		if (item["comments"] == 1) {
 			comments = "1 comment";
@@ -58,7 +89,8 @@ function toLink(id, item) {
 					item["real_attachment"] +
 					'"></video></div>';
 			} else if (audio.indexOf(ext) != -1) {
-				// audio
+				media =
+					'<a style="color:white" href="https://cdn.stibarc.com/images/' + item["real_attachment"] + '"><div class="post-media"><img src="./assets/images/music.png"></div></a>';
 			}
 		}
 		postsHTML +=
@@ -66,7 +98,7 @@ function toLink(id, item) {
 			item["upvotes"] +
 			'<img class="vote down" src="./assets/images/down.png">' +
 			item["downvotes"] +
-			"</div> <h2>" +
+			"</div> <h2 class='post-title'>" +
 			emojiPost(title) +
 			"</h2> <h2>" +
 			item["poster"] +
@@ -94,7 +126,7 @@ function loadPosts() {
 		var tmp = JSON.parse(this.responseText);
 		$("posts").innerHTML = "";
 		var totalPosts = tmp["totalposts"];
-		for (var i = totalPosts; i > totalPosts - 8; i--) {
+		for (var i = totalPosts; i > totalPosts - 16; i--) {
 			toLink(i, tmp[i]);
 		}
 		$("posts").innerHTML = postsHTML;

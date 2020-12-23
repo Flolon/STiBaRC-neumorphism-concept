@@ -179,6 +179,7 @@ img {
 #posts > div {
 	position: relative;
 	width: calc(500px - 1rem);
+	min-width: 450px;
 	height: calc(300px - 1.5rem);
 	margin: 1rem 1rem 0.25rem 1rem;
 	padding: 1.5rem 1rem 1rem 1rem;
@@ -258,4 +259,11 @@ img {
 	width: 155px;
 	border-radius: 2px;
 	position: absolute;
+}
+
+.post-title {
+	white-space: nowrap;
+	max-width: calc(100% - 140px);
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

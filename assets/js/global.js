@@ -65,6 +65,36 @@ function getDayOfWeek(date) {
 		  ][dayOfWeek];
 }
 
+function formatDate(dateString) {
+	//var date = getDayOfWeek(toDate(dateString)) + toDate(dateString);
+	var currentDate = new Date();
+	var hour = currentDate.getHours();
+	var minute = currentDate.getMinutes();
+	var time = currentDate.getTime();
+	var postDate = toDate(dateString);
+	var year2 = postDate.getFullYear();
+	var month2 = postDate.getMonth();
+	var day2 = postDate.getDate()
+	var time2 = postDate.getTime();
+	
+	if (
+		((time - time2) / 60000) < ((hour * 60) + (minute))
+	) {
+		var date = "Today";
+	} else if (
+		((time - time2) / 60000) < ((hour * 60) + 1440 + (minute))
+	) {
+		var date = "Yesterday";
+	} else if (
+		((time - time2) / 60000) < ((hour * 60) + 8640 + (minute))
+	) {
+		var date = getDayOfWeek(postDate);
+	} else {
+		var date = month2 + "/" + day2 + "/" + year2;
+	}
+	return date;
+}
+
 var emojiIndex = {};
 if (
 	localStorage.getItem("emojiIndex") !== null &&

@@ -58,7 +58,8 @@ function toLink(id, item) {
 					item["real_attachment"] +
 					'"></video></div>';
 			} else if (audio.indexOf(ext) != -1) {
-				// audio
+				media =
+					'<a style="color:white" href="https://cdn.stibarc.com/images/' + item["real_attachment"] + '"><div class="post-media"><img src="./assets/images/music.png"></div></a>';
 			}
 		}
 		postsHTML +=

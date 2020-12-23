@@ -8,6 +8,7 @@
 			format("embedded-opentype");
 	font-weight: normal;
 	font-style: normal;
+	
 }
 
 body {
@@ -48,6 +49,10 @@ body {
 	flex-grow: 1;
 }
 
+h2 {
+	font-weight: 700;
+}
+
 img {
 	border: none;
 }
@@ -62,6 +67,7 @@ img {
 	background-size: cover;
 	/* 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.55); */
 	border-bottom: 18px solid;
+	border-top: 0;
 	border-image: url("../images/border.png") 78 1 repeat;
 }
 

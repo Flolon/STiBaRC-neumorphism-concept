@@ -18,7 +18,16 @@ function setMedia(attachment) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload = function() {
 		var mediaSrc = this.responseText;
-		$(attachment).src = mediaSrc;
+		var media = document.createElement("div");
+		var video = document.createElement("video");
+		video.setAttribute("muted", null);
+		var source = document.createElement("source");
+		source.setAttribute("src", mediaSrc);
+		video.appendChild(source);
+		media.appendChild(video);
+		
+		$(attachment).innerHTML = "";
+		$(attachment).appendChild(media);
 	}
 	xhttp.open("GET", "https://api.stibarc.com/getimage.sjs?id=" + attachment, true);
 	xhttp.send();
@@ -47,7 +56,7 @@ function toLink(id, item) {
 		} else if (item["comemnts"] > 0) {
 			comments = item["comments"] + " comments";
 		}
-		var media = '';
+		var media = "";
 		var images = ["png", "jpg", "gif", "webp", "svg"];
 		var videos = ["mov", "mp4", "m4a", "webm"];
 		var audio = ["spx", "m3a", "wma", "wav", "mp3"];
@@ -69,12 +78,10 @@ function toLink(id, item) {
 				media.appendChild(img);
 			} else if (videos.indexOf(ext) != -1) {
 				//media = '<div class="post-media"><video id="'+ item["attachment"] +'"></video></div>';
-				var video = document.createElement("video");
-				var source = document.createElement("source");
-				source.setAttribute("src", src);
-				source.setAttribute("id", item["attachment"]);
-				video.appendChild(source);
-				media.appendChild(video);
+				media.setAttribute("id", item["attachment"]);
+				var loading = document.createElement("h3");
+				loading.innerHTML = "<br><center>Loading...</center>";
+				media.appendChild(loading);
 				setMedia(item["attachment"]);
 			} else if (audio.indexOf(ext) != -1) {
 				//media = '<a style="color:white" href="https://cdn.stibarc.com/images/' + src + '"><div class="post-media"><img src="./assets/images/music.png"></div></a>';

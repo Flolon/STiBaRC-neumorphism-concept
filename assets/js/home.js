@@ -72,26 +72,23 @@ function toLink(id, item) {
 			var ext = item["real_attachment"].split(".")[1];
 			var src = "https://cdn.stibarc.com/images/" + item["real_attachment"];
 			if (images.indexOf(ext) != -1) {
-				//media = '<div class="post-media"><img src="' + src + '"></div>';
 				var img = document.createElement("img");
 				img.setAttribute("src", src);
 				media.appendChild(img);
 			} else if (videos.indexOf(ext) != -1) {
-				//media = '<div class="post-media"><video id="'+ item["attachment"] +'"></video></div>';
 				media.setAttribute("id", item["attachment"]);
 				var loading = document.createElement("h3");
 				loading.innerHTML = "<br><center>Loading...</center>";
 				media.appendChild(loading);
 				setMedia(item["attachment"]);
 			} else if (audio.indexOf(ext) != -1) {
-				//media = '<a style="color:white" href="https://cdn.stibarc.com/images/' + src + '"><div class="post-media"><img src="./assets/images/music.png"></div></a>';
 				var link = document.createElement("a");
 				link.setAttribute("href", src);
+				link.setAttribute("target", "_blank");
 				var img = document.createElement("img");
 				img.setAttribute("src", "./assets/images/music.png");
-				var embed = link.appendChild(media);
-				embed.appendChild(img);
-				media = embed;
+				link.appendChild(img);
+				media.appendChild(link);
 			}
 			mediaDiv.appendChild(media);
 			media = mediaDiv.innerHTML;

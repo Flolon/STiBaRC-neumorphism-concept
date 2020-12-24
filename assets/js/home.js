@@ -21,6 +21,7 @@ function setMedia(attachment) {
 		var media = document.createElement("div");
 		var video = document.createElement("video");
 		video.setAttribute("muted", null);
+		video.setAttribute("controls", null);
 		var source = document.createElement("source");
 		source.setAttribute("src", mediaSrc);
 		video.appendChild(source);
